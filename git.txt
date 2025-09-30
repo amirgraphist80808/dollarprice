@@ -1,0 +1,29 @@
+initial local repo*
+git init 
+create github repo*
+........................
+*connect local repo to remote repo*
+git remote add origin <repo-link>
+git branch -M main
+git pull --rebase origin main
+git push -u origin main
+............................
+changes -> stage -> commit
+.............................
+*add & remove from staged/changes*
+git add index.js
+git restore --staged amir.js 
+git add .
+git restore --staged .
+...........................
+*remove from changes*
+git clean -f برای پاک کردن فایل
+git store . برای پاک کردن کد
+git status 
+.............................
+*commit*
+git log
+git commit -m "message"
+..............................
+*Push*
+git push
