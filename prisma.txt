@@ -1,0 +1,55 @@
+npm install prisma --save-dev
+npm install @prisma/client
+npx prisma init
+(make schema )
+(remove output)
+npx prisma generate
+npx prisma migrate dev --name init
+
+3306
+
+......................................
+// lib/prisma.ts
+import { PrismaClient } from "@prisma/client";
+
+const globalForPrisma = global as unknown as { prisma: PrismaClient };
+
+export const prisma =
+  globalForPrisma.prisma || new PrismaClient();
+
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+........................................
+prisma.user.findMany()
+prisma.user.findUnique({where: { email: "test@example.com" }});
+prisma.user.findFirst({where: { name: "Ali" }});
+prisma.user.create({
+  data: {
+    name: "Ali",
+    email: "ali@example.com"
+  }
+});
+const updatedRecord = await prisma.user.update({
+  where: { /* شرط پیدا کردن رکورد */ },
+  data:  { /* فیلدهایی که می‌خواهید تغییر دهند */ },
+});
+..........................................
+model blogpost {
+ id String @id @default(uuid())
+  title String
+  content String
+  image String
+  authorId String
+  authorName String
+  authorImage String
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+}
+
+const user = await prisma.user.update({
+  where: { id: 1 },
+  data: { name: "Ali Updated" }
+});
+
+const user = await prisma.user.delete({
+  where: { id: 1 }
+});
