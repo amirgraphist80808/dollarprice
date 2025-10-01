@@ -27,3 +27,6 @@ git commit -m "message"
 ..............................
 *Push*
 git push
+..............................
+*clone*
+git clone <link>
